@@ -16,7 +16,6 @@ const getPostData = (req) => {
         let postData = ''
 
         req.on('data', chunk => {
-            console.log('分段接受的post请求数据', chunk)
             postData += chunk.toString()
         })
         req.on('end', () => {
@@ -35,7 +34,19 @@ const serverHandle = (req, res) => {
     res.setHeader('Content-type', 'application/json')
     req.path = req.url.split("?")[0]
     req.query = querystring.parse(req.url.split("?")[1])
-
+    // 解析cookie
+    req.cookie = {}
+    const cookieStr = req.headers.cookie || ''
+    cookieStr.split('&').forEach(item => {
+        if (!item) {
+            return
+        }
+        const arr = item.split('=')
+        const key = arr[0].trim()
+        const value = arr[1].trim()
+        req.cookie[key] = value
+    })
+    console.log('cookie', req.cookie)
     getPostData(req).then(postData => {
         req.body = postData
         const blogResult = handleBlogRouter(req, res)
@@ -47,11 +58,13 @@ const serverHandle = (req, res) => {
             })
             return
         }
-        const userData = handleUserRouter(req, res)
-        if (userData) {
-            res.end(
-                JSON.stringify(userData)
-            )
+        const userResult = handleUserRouter(req, res)
+        if (userResult) {
+            userResult.then(userData => {
+                res.end(
+                    JSON.stringify(userData)
+                )
+            })
             return
         }
 
