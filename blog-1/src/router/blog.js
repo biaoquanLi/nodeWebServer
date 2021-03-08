@@ -3,12 +3,12 @@ const { getList, getDetail, newBlog, updateBlog, delBlog } = require('../control
 
 // 统一的登录验证函数
 const loginCheck = (req) => {
-    if(!req.session.username) {
+    if (!req.session.username) {
         return Promise.resolve(
-        new ErrorModel('尚未登录')
-    )
+            new ErrorModel('尚未登录')
+        )
     }
-    
+
 }
 
 
@@ -18,10 +18,10 @@ const handleBlogRouter = (req, res) => {
     if (method === 'GET' && path === '/api/blog/list') {
         let author = req.query.author || ''
         const keyword = req.query.keyword || ""
-        
-        if(req.query.isadmin){
+
+        if (req.query.isadmin) {
             const loginCheckResult = loginCheck(req)
-            if(loginCheckResult){
+            if (loginCheckResult) {
                 return loginCheckResult
             }
             author = req.session.username
@@ -49,7 +49,7 @@ const handleBlogRouter = (req, res) => {
     if (method === 'POST' && path === '/api/blog/new') {
 
         const loginCheckResult = loginCheck(req)
-        if(loginCheckResult){ // 未登录
+        if (loginCheckResult) { // 未登录
             return loginCheckResult
         }
         req.body.author = req.session.username
@@ -67,7 +67,7 @@ const handleBlogRouter = (req, res) => {
     }
     if (method === 'POST' && path === '/api/blog/update') {
         const loginCheckResult = loginCheck(req)
-        if(loginCheckResult){ // 未登录
+        if (loginCheckResult) { // 未登录
             return loginCheckResult
         }
         req.body.author = req.session.username
@@ -85,11 +85,11 @@ const handleBlogRouter = (req, res) => {
     }
     if (method === 'POST' && path === '/api/blog/delete') {
         const loginCheckResult = loginCheck(req)
-        if(loginCheckResult){ // 未登录
+        if (loginCheckResult) { // 未登录
             return loginCheckResult
         }
         const author = req.session.username
-        const delData = delBlog(req.query.id,author)
+        const delData = delBlog(req.query.id, author)
         if (delData) {
             return delData.then(res => {
                 if (res) {

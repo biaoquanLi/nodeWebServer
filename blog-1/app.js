@@ -1,7 +1,8 @@
 const handleBlogRouter = require('./src/router/blog')
 const handleUserRouter = require('./src/router/user')
 const querystring = require('querystring')
-const {redisSet,redisGet} = require('./src/db/redis')
+const { redisSet, redisGet } = require('./src/db/redis')
+const { access } = require('./src/utils/log')
 
 //用于处理postData
 const getPostData = (req) => {
@@ -32,6 +33,8 @@ const getPostData = (req) => {
 }
 
 const serverHandle = (req, res) => {
+    access(`${req.method} -- ${req.url} -- ${req.headers['user-agent']}--${Date.now()}`)
+
     res.setHeader('Content-type', 'application/json')
     req.path = req.url.split("?")[0]
     req.query = querystring.parse(req.url.split("?")[1])
@@ -49,15 +52,15 @@ const serverHandle = (req, res) => {
     })
 
     //解析session(使用redis)
-    let needSetCookie =false
+    let needSetCookie = false
     let userId = req.cookie.userId
-    if(!userId){
+    if (!userId) {
         needSetCookie = true
         userId = `${Date.now()}_${Math.random()}`
-        redisSet(userId,{})
+        redisSet(userId, {})
     }
     req.sessionId = userId
-    redisGet(req.sessionId).then(sessionData=>{
+    redisGet(req.sessionId).then(sessionData => {
         if (sessionData == null) {
             // 初始化 redis 中的 session 值
             redisSet(req.sessionId, {})
