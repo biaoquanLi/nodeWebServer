@@ -1,18 +1,35 @@
 const { SuccessModel, ErrorModel } = require('../model/resModel')
 const { getList, getDetail, newBlog, updateBlog, delBlog } = require('../controller/blog')
 
+// 统一的登录验证函数
+const loginCheck = (req) => {
+    if(!req.session.username) {
+        return Promise.resolve(
+        new ErrorModel('尚未登录')
+    )
+    }
+    
+}
+
+
 const handleBlogRouter = (req, res) => {
     const { method, path, url } = req
 
     if (method === 'GET' && path === '/api/blog/list') {
-        const author = req.query.author || ''
+        let author = req.query.author || ''
         const keyword = req.query.keyword || ""
-        const listResult = getList(author, keyword)
-        if (listResult) {
-            return listResult.then(res => {
-                return new SuccessModel(res)
-            })
+        
+        if(req.query.isadmin){
+            const loginCheckResult = loginCheck(req)
+            if(loginCheckResult){
+                return loginCheckResult
+            }
+            author = req.session.username
         }
+        const listResult = getList(author, keyword)
+        return listResult.then(res => {
+            return new SuccessModel(res)
+        })
     }
     if (method === 'GET' && path === '/api/blog/detail') {
         const id = req.query.id
@@ -30,6 +47,12 @@ const handleBlogRouter = (req, res) => {
         }
     }
     if (method === 'POST' && path === '/api/blog/new') {
+
+        const loginCheckResult = loginCheck(req)
+        if(loginCheckResult){ // 未登录
+            return loginCheckResult
+        }
+        req.body.author = req.session.username
         const body = req.body
         const newBlogData = newBlog(body)
         if (newBlogData) {
@@ -43,6 +66,11 @@ const handleBlogRouter = (req, res) => {
         }
     }
     if (method === 'POST' && path === '/api/blog/update') {
+        const loginCheckResult = loginCheck(req)
+        if(loginCheckResult){ // 未登录
+            return loginCheckResult
+        }
+        req.body.author = req.session.username
         const body = req.body
         const updateData = updateBlog(body)
         if (updateData) {
@@ -56,7 +84,12 @@ const handleBlogRouter = (req, res) => {
         }
     }
     if (method === 'POST' && path === '/api/blog/delete') {
-        const delData = delBlog(req.query.id)
+        const loginCheckResult = loginCheck(req)
+        if(loginCheckResult){ // 未登录
+            return loginCheckResult
+        }
+        const author = req.session.username
+        const delData = delBlog(req.query.id,author)
         if (delData) {
             return delData.then(res => {
                 if (res) {

@@ -1,0 +1,28 @@
+2021/03/08 15:29:08 [emerg] 10592#13720: unknown directive "location/" in D:\software\nginx-1.19.7\nginx-1.19.7/conf/nginx.conf:47
+2021/03/08 15:35:31 [emerg] 14408#12928: unknown directive "location/" in D:\software\nginx-1.19.7\nginx-1.19.7/conf/nginx.conf:47
+2021/03/08 16:08:12 [notice] 17948#17344: signal process started
+2021/03/08 16:08:12 [emerg] 4540#7464: bind() to 0.0.0.0:8001 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)
+2021/03/08 16:11:34 [notice] 11016#16996: signal process started
+2021/03/08 16:12:03 [emerg] 6224#16908: bind() to 0.0.0.0:8001 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)
+2021/03/08 16:14:30 [emerg] 13072#17736: bind() to 0.0.0.0:8001 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)
+2021/03/08 16:21:13 [error] 11084#13368: *2 CreateFile() "D:\software\nginx-1.19.7\nginx-1.19.7/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1:8080", referrer: "http://127.0.0.1:8080/"
+2021/03/08 16:25:16 [error] 11084#13368: *3 CreateFile() "D:\software\nginx-1.19.7\nginx-1.19.7/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2021/03/08 16:26:48 [notice] 18252#7476: signal process started
+2021/03/08 16:27:15 [notice] 17096#16612: signal process started
+2021/03/08 16:33:21 [notice] 2448#14160: signal process started
+2021/03/08 16:35:30 [notice] 11860#16108: signal process started
+2021/03/08 16:46:06 [notice] 8292#13672: signal process started
+2021/03/08 17:02:00 [emerg] 15820#14428: bind() to 0.0.0.0:8001 failed (10013: An attempt was made to access a socket in a way forbidden by its access permissions)
+2021/03/08 17:05:48 [notice] 17200#11868: signal process started
+2021/03/08 17:07:07 [notice] 16204#13540: signal process started
+2021/03/08 17:15:04 [error] 13544#2604: *13 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /web/ HTTP/1.1", upstream: "http://[::1]:8001/web/", host: "localhost:8080"
+2021/03/08 17:15:30 [notice] 5656#16516: signal process started
+2021/03/08 17:15:36 [error] 1744#17236: *18 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /web/ HTTP/1.1", upstream: "http://[::1]:8001/web/", host: "localhost:8080"
+2021/03/08 17:18:57 [notice] 15720#16696: signal process started
+2021/03/08 17:19:06 [error] 13528#15044: *28 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /web/ HTTP/1.1", upstream: "http://[::1]:8001/web/", host: "localhost:8080"
+2021/03/08 17:19:34 [error] 13528#15044: *29 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /web/index.html HTTP/1.1", upstream: "http://[::1]:8001/web/index.html", host: "localhost:8080"
+2021/03/08 17:21:26 [notice] 12884#5360: signal process started
+2021/03/08 17:21:34 [error] 7780#7228: *45 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "http://[::1]:8001/", host: "localhost:8080"
+2021/03/08 17:24:19 [notice] 15204#14032: signal process started
+2021/03/08 17:24:28 [error] 13332#11048: *67 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "http://[::1]:8001/", host: "localhost:8080"
+2021/03/08 17:25:32 [error] 13332#11048: *78 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /detail.html?id=1 HTTP/1.1", upstream: "http://[::1]:8001/detail.html?id=1", host: "localhost:8080"

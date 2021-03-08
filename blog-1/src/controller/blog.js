@@ -19,9 +19,9 @@ const getDetail = (id) => {
 }
 
 const newBlog = (newBlog = {}) => {
-    const author = 'zhangsan'
+    // const author = 'zhangsan'
     const createtime = new Date().getTime()
-    const { title, content } = newBlog
+    const { title, content,author } = newBlog
 
     let sql = `insert into blogs (title,content,createtime,author) values ('${title}','${content}',${createtime},'${author}');`
     return exec(sql).then(res => {
@@ -31,8 +31,8 @@ const newBlog = (newBlog = {}) => {
     })
 }
 const updateBlog = (updateBlog = {}) => {
-    const author = 'zhangsan'
-    const { id, title, content } = updateBlog
+    // const author = 'zhangsan'
+    const { id, title, content, author } = updateBlog
     let sql = `update blogs set title='${title}',content='${content}' where id=${id} and author='${author}'`
     return exec(sql).then(res => {
         console.log(res)
@@ -43,8 +43,8 @@ const updateBlog = (updateBlog = {}) => {
         }
     })
 }
-const delBlog = (id) => {
-    let sql = `delete from blogs where id=${id}`
+const delBlog = (id, author) => {
+    let sql = `delete from blogs where id=${id} and author=${author}`
     return exec(sql).then(res => {
         if (res.affectedRows > 0) {
             return true
