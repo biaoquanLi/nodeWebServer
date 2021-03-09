@@ -50,7 +50,6 @@ const serverHandle = (req, res) => {
         const value = arr[1].trim()
         req.cookie[key] = value
     })
-
     //解析session(使用redis)
     let needSetCookie = false
     let userId = req.cookie.userId
@@ -70,9 +69,7 @@ const serverHandle = (req, res) => {
             // 设置 session
             req.session = sessionData
         }
-    })
-
-    getPostData(req).then(postData => {
+        getPostData(req).then(postData => {
         req.body = postData
         const blogResult = handleBlogRouter(req, res)
         if (blogResult) {
@@ -98,7 +95,7 @@ const serverHandle = (req, res) => {
         res.write('404 Not Found\n')
         res.end()
     })
-
+    })
 }
 
 module.exports = serverHandle

@@ -26,3 +26,4 @@
 2021/03/08 17:24:19 [notice] 15204#14032: signal process started
 2021/03/08 17:24:28 [error] 13332#11048: *67 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET / HTTP/1.1", upstream: "http://[::1]:8001/", host: "localhost:8080"
 2021/03/08 17:25:32 [error] 13332#11048: *78 connect() failed (10061: No connection could be made because the target machine actively refused it) while connecting to upstream, client: 127.0.0.1, server: localhost, request: "GET /detail.html?id=1 HTTP/1.1", upstream: "http://[::1]:8001/detail.html?id=1", host: "localhost:8080"
+2021/03/09 11:04:00 [emerg] 14556#16488: CreateFile() "C:\Users\linbiaoquan\Desktop\Node.js 从零开发 web server博客项目 前端晋升全栈工程师必备\nodeWebServer\nginx-1.19.7/conf/nginx.conf" failed (1113: No mapping for the Unicode character exists in the target multi-byte code page)

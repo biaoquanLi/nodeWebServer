@@ -74,9 +74,8 @@
 
         // 加载数据
         get(url).then((res) => {
-            console.log(111,res)
             if (res.code !== 0) {
-                alert('数据错误')
+                alert(res.msg||'数据错误')
                 return
             }
 

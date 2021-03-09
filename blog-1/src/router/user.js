@@ -6,7 +6,6 @@ const { redisSet } = require('../db/redis')
 const getCookieExpires = () => {
     const d = new Date()
     d.setTime(d.getTime() + (24 * 60 * 60 * 1000))
-    console.log(d.toGMTString())
     return d.toGMTString()
 }
 const handleUserRouter = (req, res) => {
@@ -17,11 +16,13 @@ const handleUserRouter = (req, res) => {
         const loginData = login(username, password)
         if (loginData) {
             return loginData.then(data => {
-                if (data.username) {
+                if (data&&data.username) {
                     //设置session
                     req.session.username = data.username
                     req.session.realname = data.realname
                     redisSet(req.sessionId,req.session)
+                    //登录成功后设置cookie
+                    res.setHeader('Set-Cookie', `userId=${req.sessionId};path=/;httpOnly;expires=${getCookieExpires()}`)
                     return new SuccessModel('登录成功')
                 } else {
                     return new ErrorModel('登录失败')

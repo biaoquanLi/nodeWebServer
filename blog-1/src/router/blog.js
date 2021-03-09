@@ -3,7 +3,7 @@ const { getList, getDetail, newBlog, updateBlog, delBlog } = require('../control
 
 // 统一的登录验证函数
 const loginCheck = (req) => {
-    if (!req.session.username) {
+    if (!(req.session&&req.session.username)) {
         return Promise.resolve(
             new ErrorModel('尚未登录')
         )
@@ -37,7 +37,6 @@ const handleBlogRouter = (req, res) => {
 
         if (detailData) {
             return detailData.then(res => {
-                console.log('detailData', res)
                 if (res) {
                     return new SuccessModel(res)
                 } else {
@@ -72,7 +71,8 @@ const handleBlogRouter = (req, res) => {
         }
         req.body.author = req.session.username
         const body = req.body
-        const updateData = updateBlog(body)
+        const id = req.query.id
+        const updateData = updateBlog(id,body)
         if (updateData) {
             return updateData.then(res => {
                 if (res) {
@@ -83,7 +83,7 @@ const handleBlogRouter = (req, res) => {
             })
         }
     }
-    if (method === 'POST' && path === '/api/blog/delete') {
+    if (method === 'POST' && path === '/api/blog/del') {
         const loginCheckResult = loginCheck(req)
         if (loginCheckResult) { // 未登录
             return loginCheckResult
