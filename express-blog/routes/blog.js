@@ -13,7 +13,7 @@ const {
 } = require('../controller/blog')
 const loginCheck = require('../middleware/loginCheck')
 
-router.get('/list', function (req, res, next) {
+router.get('/list', (req, res, next) => {
     let {
         author = '', keyword = ''
     } = req.query
