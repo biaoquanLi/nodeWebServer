@@ -32,7 +32,7 @@ router.get('/detail', async (ctx, next) => {
     const id = ctx.query.id
     const detailData = await getDetail(id)
     if (detailData) {
-        ctx.body = new SuccessModel(data)
+        ctx.body = new SuccessModel(detailData)
     } else {
         ctx.body = new ErrorModel('未找到该篇博客')
     }
